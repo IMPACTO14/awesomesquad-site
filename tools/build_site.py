@@ -43,7 +43,7 @@ NAV = [("index.html", "Home"), ("chris.html", "Telecrisis Chris"), ("pilots.html
 
 # Links: set url to a real address to switch a button on. Empty = shown greyed out as "soon".
 LINKS = [
-    ("itch.io", "", "Play / download"),
+    ("itch.io", "https://tsavagegames.itch.io/telecrisis-chris", "Play / download"),
     ("Steam", "", "Wishlist"),
     ("Discord", "", "Join the squad"),
     ("YouTube", "https://www.youtube.com/@SAVAGE-GAMES-LLC", "Videos"),
