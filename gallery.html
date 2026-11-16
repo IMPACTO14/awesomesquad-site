@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Screenshots · Telecrisis Chris</title>
+<meta name="description" content="Screenshots of Telecrisis Chris: star fights, the star map and side quests.">
+<meta property="og:title" content="Screenshots · Telecrisis Chris">
+<meta property="og:description" content="Screenshots of Telecrisis Chris: star fights, the star map and side quests.">
+<meta property="og:image" content="https://awesomesquad.fyi/img/shots/star-yellow.jpg">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="stars" aria-hidden="true"></div>
+<header class="site-head"><div class="inner">
+  <a class="brand" href="index.html"><img src="img/icon.png" alt="">Awesome <span>Squad</span></a>
+  <nav><a href="index.html">Home</a><a href="chris.html">Telecrisis Chris</a><a href="pilots.html">Pilots</a><a href="gallery.html" class=on>Screenshots</a><a href="devlog.html">Devlog</a><a href="team.html">Team</a></nav>
+</div></header>
+<main>
+
+<section>
+  <div class="kicker">Telecrisis Chris</div>
+  <h1><span>Screenshots</span></h1>
+  <p class="lead">From the current development build. Click a shot to see it full size.</p>
+  <div class="gallery"><figure><a href="img/shots/star-yellow.jpg" data-cap="Yellow Star: lining up on the Void Core"><img src="img/shots/star-yellow-sm.jpg" alt="Yellow Star: lining up on the Void Core" loading="lazy"></a><figcaption>Yellow Star: lining up on the Void Core</figcaption></figure><figure><a href="img/shots/star-blue.jpg" data-cap="Blue Giant: fast flares, fast field"><img src="img/shots/star-blue-sm.jpg" alt="Blue Giant: fast flares, fast field" loading="lazy"></a><figcaption>Blue Giant: fast flares, fast field</figcaption></figure><figure><a href="img/shots/star-map.jpg" data-cap="The star map: pick your path"><img src="img/shots/star-map-sm.jpg" alt="The star map: pick your path" loading="lazy"></a><figcaption>The star map: pick your path</figcaption></figure><figure><a href="img/shots/fleet.jpg" data-cap="Fleet Skirmish"><img src="img/shots/fleet-sm.jpg" alt="Fleet Skirmish" loading="lazy"></a><figcaption>Fleet Skirmish</figcaption></figure><figure><a href="img/shots/ace.jpg" data-cap="Ace Hunt"><img src="img/shots/ace-sm.jpg" alt="Ace Hunt" loading="lazy"></a><figcaption>Ace Hunt</figcaption></figure><figure><a href="img/shots/convoy.jpg" data-cap="Escort Convoy"><img src="img/shots/convoy-sm.jpg" alt="Escort Convoy" loading="lazy"></a><figcaption>Escort Convoy</figcaption></figure><figure><a href="img/shots/wormhole.jpg" data-cap="Wormhole Run"><img src="img/shots/wormhole-sm.jpg" alt="Wormhole Run" loading="lazy"></a><figcaption>Wormhole Run</figcaption></figure></div>
+</section>
+
+</main>
+<footer class="site-foot">
+  <span>© Awesome Squad · awesomesquad.fyi</span>
+  <span class="links"><a href="index.html">Home</a><a href="chris.html">Telecrisis Chris</a><a href="pilots.html">Pilots</a><a href="gallery.html" class=on>Screenshots</a><a href="devlog.html">Devlog</a><a href="team.html">Team</a></span>
+</footer>
+<div class="lightbox" id="lb" role="dialog" aria-modal="true"><button aria-label="Close">✕</button><img alt=""><p></p></div>
+<script>
+const lb=document.getElementById('lb'),li=lb.querySelector('img'),lp=lb.querySelector('p');
+const items=[...document.querySelectorAll('.gallery a')];let cur=0;
+function show(i){cur=(i+items.length)%items.length;li.src=items[cur].href;lp.textContent=items[cur].dataset.cap;lb.classList.add('open');}
+items.forEach((a,i)=>a.addEventListener('click',e=>{e.preventDefault();show(i);}));
+lb.addEventListener('click',e=>{if(e.target!==li)lb.classList.remove('open');});
+document.addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return;
+ if(e.key==='Escape')lb.classList.remove('open');if(e.key==='ArrowRight')show(cur+1);if(e.key==='ArrowLeft')show(cur-1);});
+</script>
+</body>
+</html>
