@@ -46,7 +46,7 @@ LINKS = [
     ("itch.io", "", "Play / download"),
     ("Steam", "", "Wishlist"),
     ("Discord", "", "Join the squad"),
-    ("YouTube", "", "Videos"),
+    ("YouTube", "https://www.youtube.com/@SAVAGE-GAMES-LLC", "Videos"),
     ("Twitch", "", "Live streams"),
 ]
 
