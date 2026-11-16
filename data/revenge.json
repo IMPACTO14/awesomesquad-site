@@ -1,0 +1,363 @@
+{
+  "areas": [
+    {
+      "desc": "Dust-bowl arenas on the Federation's edge, where nobody asks who is signing up. The Rim Governor sponsors the league and receives its champions in person.",
+      "hi": 20,
+      "lo": 1,
+      "matches": 11,
+      "name": "The Rim League",
+      "outpost": "Drifter's Dock"
+    },
+    {
+      "desc": "Refinery-moon arenas bankrolled by the Fuel Baron, who owns every tanker the Federation flies. His circuit, his rules, his box seat.",
+      "hi": 40,
+      "lo": 20,
+      "matches": 11,
+      "name": "The Kessrow Circuit",
+      "outpost": "Smuggler's Burrow"
+    },
+    {
+      "desc": "Military games held in the shipyards to entertain the fleet. The Fleet Marshal awards the medals personally.",
+      "hi": 60,
+      "lo": 40,
+      "matches": 11,
+      "name": "The Halcyon Games",
+      "outpost": "Breakers' Yard"
+    },
+    {
+      "desc": "The Grand Coliseum at the heart of the Federation. The High Chancellor crowns the champions, and keeps the keys to the prison where the pilots are held.",
+      "hi": 80,
+      "lo": 60,
+      "matches": 11,
+      "name": "The Core Championship",
+      "outpost": "Hollow Asteroid Camp"
+    }
+  ],
+  "classes": [
+    {
+      "armor": "heavy",
+      "atk": 4,
+      "def": 2,
+      "desc": "Holds the line in heavy plating. Slow, but very hard to hurt.",
+      "dodge": 0.0,
+      "hp": 24,
+      "id": "vanguard",
+      "mastery": "Phalanx",
+      "mastery_desc": "allies next to a Vanguard take 15% less damage",
+      "move": 3,
+      "name": "Vanguard",
+      "passive_desc": "+1 defense. Enemies that can reach the Vanguard must attack it",
+      "passive_name": "Challenger",
+      "role": "Tank",
+      "signature": "Shield Wall",
+      "signature_cost": 2,
+      "signature_desc": "Until your next turn, you and the allies next to you take half damage.",
+      "spd": 3,
+      "trial": "Vanguard Trial: Hold the Line (The Rim League)",
+      "weapons": [
+        "heavy",
+        "blade"
+      ],
+      "weight": "heavy"
+    },
+    {
+      "armor": "medium",
+      "atk": 5,
+      "def": 1,
+      "desc": "Fights with fists and powered gauntlets. Punishes anyone who swings at them.",
+      "dodge": 0.08,
+      "hp": 20,
+      "id": "brawler",
+      "mastery": "Iron Fists",
+      "mastery_desc": "a normal guard against an adjacent attacker also counters for half",
+      "move": 4,
+      "name": "Brawler",
+      "passive_desc": "parry counters hit twice as hard",
+      "passive_name": "Counterpuncher",
+      "role": "Hand-to-hand",
+      "signature": "Counter Stance",
+      "signature_cost": 2,
+      "signature_desc": "Until your next turn, hit back at every adjacent enemy that attacks you.",
+      "spd": 5,
+      "trial": "Brawler Trial: Knuckle Pit (The Kessrow Circuit)",
+      "weapons": [
+        "fist",
+        "heavy"
+      ],
+      "weight": "medium"
+    },
+    {
+      "armor": "heavy",
+      "atk": 5,
+      "def": 1,
+      "desc": "Cracks armor and doors with breaching gear. Big single hits, slow feet.",
+      "dodge": 0.03,
+      "hp": 20,
+      "id": "breacher",
+      "mastery": "Demolisher",
+      "mastery_desc": "ignores all of the target's Defense",
+      "move": 3,
+      "name": "Breacher",
+      "passive_desc": "ignores half of the target's Defense",
+      "passive_name": "Armor Breaker",
+      "role": "Heavy hitter",
+      "signature": "Sunder",
+      "signature_cost": 2,
+      "signature_desc": "Weapon strike that exposes the target and knocks it back.",
+      "spd": 3,
+      "trial": "Breacher Trial: Armoured Wall (The Halcyon Games)",
+      "weapons": [
+        "heavy"
+      ],
+      "weight": "heavy"
+    },
+    {
+      "armor": "light",
+      "atk": 4,
+      "def": 0,
+      "desc": "Slips behind the enemy. Lifts credits off everyone they drop.",
+      "dodge": 0.15,
+      "hp": 16,
+      "id": "infiltrator",
+      "mastery": "Ghost",
+      "mastery_desc": "Vanish costs 1 less and +1 move",
+      "move": 5,
+      "name": "Infiltrator",
+      "passive_desc": "a further +15% damage from behind, +3 credits per takedown",
+      "passive_name": "Backstab & Pickpocket",
+      "role": "Rogue / thief",
+      "signature": "Vanish",
+      "signature_cost": 2,
+      "signature_desc": "Free action. This turn you can move through enemies and your next attack counts as from behind.",
+      "spd": 8,
+      "trial": "Infiltrator Trial: Shadow Bout (The Core Championship)",
+      "weapons": [
+        "blade",
+        "pistol",
+        "fist"
+      ],
+      "weight": "light"
+    },
+    {
+      "armor": "medium",
+      "atk": 4,
+      "def": 0,
+      "desc": "Sidearms and rifles on the move. Scales terrain other fighters have to walk around.",
+      "dodge": 0.1,
+      "hp": 16,
+      "id": "ranger",
+      "mastery": "Eagle Eye",
+      "mastery_desc": "+1 range with pistols and rifles",
+      "move": 4,
+      "name": "Ranger",
+      "passive_desc": "+1 move; climbing costs no extra movement and can go up 2 levels in a step",
+      "passive_name": "Free Climber",
+      "role": "Mobile ranged",
+      "signature": "Covering Fire",
+      "signature_cost": 2,
+      "signature_desc": "Light hit that suppresses the target: its next attack does half damage.",
+      "spd": 6,
+      "trial": "Ranger Trial: High Ground (The Rim League)",
+      "weapons": [
+        "pistol",
+        "rifle",
+        "blade"
+      ],
+      "weight": "medium"
+    },
+    {
+      "armor": "light",
+      "atk": 5,
+      "def": 0,
+      "desc": "Hits hard from far away, and harder from above. Weak when cornered.",
+      "dodge": 0.08,
+      "hp": 13,
+      "id": "sniper",
+      "mastery": "Deadeye",
+      "mastery_desc": "Critical hits ignore Defense",
+      "move": 3,
+      "name": "Sniper",
+      "passive_desc": "+15% more damage for each level above the target (+30% per level in all)",
+      "passive_name": "Vantage",
+      "role": "Long range",
+      "signature": "Mark Target",
+      "signature_cost": 1,
+      "signature_desc": "Free action. The whole party deals 20% more damage to this enemy for the rest of the battle.",
+      "spd": 5,
+      "trial": "Sniper Trial: Long Sight (The Halcyon Games)",
+      "weapons": [
+        "rifle",
+        "pistol"
+      ],
+      "weight": "light"
+    },
+    {
+      "armor": "medium",
+      "atk": 2,
+      "def": 0,
+      "desc": "Keeps the team standing, and the only one who can bring a fallen fighter back.",
+      "dodge": 0.05,
+      "hp": 15,
+      "id": "medic",
+      "mastery": "Second Wind",
+      "mastery_desc": "Revive costs 2 less and brings the ally back at 70% HP",
+      "move": 4,
+      "name": "Medic",
+      "passive_desc": "+3 to heals, and heals on an ally below half HP are 50% stronger",
+      "passive_name": "Triage",
+      "role": "Healer",
+      "signature": "Revive",
+      "signature_cost": 4,
+      "signature_desc": "Brings a knocked-out ally back beside you at 40% HP.",
+      "spd": 5,
+      "trial": "Medic Trial: Long Odds (The Kessrow Circuit)",
+      "weapons": [
+        "kit",
+        "pistol"
+      ],
+      "weight": "medium"
+    },
+    {
+      "armor": "light",
+      "atk": 4,
+      "def": 0,
+      "desc": "The team's battery. Generates energy fast, feeds it to allies, and shuts enemies down with gadgets.",
+      "dodge": 0.06,
+      "hp": 15,
+      "id": "technician",
+      "mastery": "Surge",
+      "mastery_desc": "Hotwire gives 3 energy instead of 2",
+      "move": 4,
+      "name": "Technician",
+      "passive_desc": "gains 2 energy a turn instead of 1, and starts with 1",
+      "passive_name": "Overclock",
+      "role": "Tech",
+      "signature": "Hotwire",
+      "signature_cost": 1,
+      "signature_desc": "Give an adjacent ally 2 energy.",
+      "spd": 6,
+      "trial": "Technician Trial: Signal Jam (The Core Championship)",
+      "weapons": [
+        "tool",
+        "kit",
+        "pistol"
+      ],
+      "weight": "light"
+    }
+  ],
+  "counts": {
+    "accessories": 26,
+    "armor": 13,
+    "layouts": 9,
+    "rares": 16,
+    "supplies": 6,
+    "techniques": 32,
+    "weapons": 38
+  },
+  "intro": [
+    {
+      "text": [
+        "The Federation keeps its people quiet with the Games: arena leagues on every world, broadcast to all of them.",
+        "The pilots who exposed what the Federation really is were called liars, and locked in a prison beyond the edge of the charts."
+      ],
+      "title": "Bread and circuses"
+    },
+    {
+      "text": [
+        "Savage, Weber, Marg and Byran grew up on that lie. They know the truth, and they know nobody gets near the Federation's core leaders. Nobody except its champions.",
+        "Four circuits, four leaders. Win a circuit and the leader who sponsors it receives you in person."
+      ],
+      "title": "Their children remember"
+    },
+    {
+      "text": [
+        "In the arena they are entertainers. Outside it they are taking the Federation apart, one core at a time.",
+        "First, decide who each of them will be."
+      ],
+      "title": "Play to the crowd"
+    }
+  ],
+  "styles": [
+    {
+      "help": "Stop the moving cursor inside the zone.",
+      "id": "sweep",
+      "name": "Sweep Bar"
+    },
+    {
+      "help": "Up to 3 quick sweeps. A miss ends the chain.",
+      "id": "chain",
+      "name": "Chain Strikes"
+    },
+    {
+      "help": "Enter the shown arrows before time runs out.",
+      "id": "combo",
+      "name": "Button Combo"
+    },
+    {
+      "help": "Memorise the arrows, then enter them once hidden.",
+      "id": "memory",
+      "name": "Memory Combo"
+    },
+    {
+      "help": "Hold, then release inside the zone. Don't overfill.",
+      "id": "hold",
+      "name": "Hold & Release"
+    },
+    {
+      "help": "Hold to charge through 3 levels. Too greedy fumbles.",
+      "id": "charge",
+      "name": "Charge Tiers"
+    },
+    {
+      "help": "Hammer the button to fill the power bar.",
+      "id": "mash",
+      "name": "Power Mash"
+    },
+    {
+      "help": "Alternate Left / Right to fill the power bar.",
+      "id": "altmash",
+      "name": "Alternating Mash"
+    },
+    {
+      "help": "Press on each beat as the cursor crosses it.",
+      "id": "rhythm",
+      "name": "Rhythm Taps"
+    },
+    {
+      "help": "Press when the shrinking ring meets the target.",
+      "id": "ring",
+      "name": "Shrinking Ring"
+    },
+    {
+      "help": "Wait for DRAW!, then press as fast as you can. Too early misses.",
+      "id": "quickdraw",
+      "name": "Quick Draw"
+    },
+    {
+      "help": "Steer the crosshair (arrows / WASD / mouse) to stay on the drifting target.",
+      "id": "lockon",
+      "name": "Lock-On"
+    },
+    {
+      "help": "Two cursors cross the bar at different speeds. Press when they line up.",
+      "id": "twin",
+      "name": "Twin Sweep"
+    },
+    {
+      "help": "Three beats tick, then go silent. Press on the next beat.",
+      "id": "blind",
+      "name": "Blind Count"
+    },
+    {
+      "help": "Press the arrows round in order (up, right, down, left) as fast as you can.",
+      "id": "spin",
+      "name": "Spin Cycle"
+    },
+    {
+      "help": "Hold to push the needle up, let go to let it fall. Keep it in the moving band.",
+      "id": "gauge",
+      "name": "Pressure Gauge"
+    }
+  ],
+  "version": "0.11.0"
+}

@@ -1,11 +1,17 @@
 import re, html, os, sys
 
 # Builds every page of awesomesquad.fyi. Usage: python3 tools/build_site.py <site dir> <path to Constants.gd>
-# Keystone text is read from the game code; everything else is in this file.
+# Keystone text is read from the Telecrisis Chris game code. Telecrisis Revenge facts (classes, circuits,
+# inputs, gear counts) come from data/revenge.json, exported from the Revenge repo with
+#   godot --headless -s res://tools/export_site_data.gd -- <site dir>/data/revenge.json
+# Everything else is in this file.
+import json
 OUT = sys.argv[1]
 SRC = sys.argv[2] if len(sys.argv) > 2 else "../Telecrisis-Chris/scripts/autoloads/Constants.gd"
 src = open(SRC, encoding="utf-8").read()
 E = html.escape
+RV = json.load(open(os.path.join(OUT, "data", "revenge.json"), encoding="utf-8"))
+RV_VER = RV["version"]
 
 # ---- keystones from the game code ----
 pool = src[src.index("const KEYSTONE_POOL := {"):]
@@ -39,6 +45,7 @@ PILOTS = [
 ]
 
 NAV = [("index.html", "Home"), ("chris.html", "Telecrisis Chris"), ("pilots.html", "Pilots"),
+       ("revenge.html", "Telecrisis Revenge"), ("classes.html", "Classes"),
        ("gallery.html", "Screenshots"), ("devlog.html", "Devlog"), ("team.html", "Team")]
 
 # Links: set url to a real address to switch a button on. Empty = shown greyed out as "soon".
@@ -60,7 +67,7 @@ def link_btns(primary_first=True):
             out.append(f'<span class="btn off" title="Link coming soon">{E(name)} <span class="soon">soon</span></span>')
     return '<div class="btns">' + "".join(out) + "</div>"
 
-def page(fname, title, desc, body, extra=""):
+def page(fname, title, desc, body, extra="", image="img/shots/star-yellow.jpg"):
     nav = "".join(f'<a href="{h}"{" class=on" if h == fname else ""}>{t}</a>' for h, t in NAV)
     foot_links = "".join(
         f'<a href="{E(u)}" target="_blank" rel="noopener">{E(n)}</a>' for n, u, _ in LINKS if u)
@@ -73,7 +80,7 @@ def page(fname, title, desc, body, extra=""):
 <meta name="description" content="{E(desc)}">
 <meta property="og:title" content="{E(title)}">
 <meta property="og:description" content="{E(desc)}">
-<meta property="og:image" content="https://awesomesquad.fyi/img/shots/star-yellow.jpg">
+<meta property="og:image" content="https://awesomesquad.fyi/{image}">
 <meta property="og:type" content="website">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/png" href="favicon.png">
@@ -100,7 +107,7 @@ def page(fname, title, desc, body, extra=""):
 
 # ---------------- index ----------------
 page("index.html", "Awesome Squad · The Telecrisis games",
-     "Awesome Squad: home of the Telecrisis games, including the turn-based space roguelike Telecrisis Chris.", f"""
+     "Awesome Squad: home of the Telecrisis games: the space roguelike Telecrisis Chris and the arena tactics RPG Telecrisis Revenge.", f"""
 <section class="hero">
   <div>
     <div class="kicker">Awesome Squad</div>
@@ -108,6 +115,7 @@ page("index.html", "Awesome Squad · The Telecrisis games",
     <p class="lead">Tactical space games built by Ted and friends. Plan your move, commit to it, and live with what the void throws back.</p>
     <div class="btns">
       <a class="btn primary" href="chris.html">Meet Telecrisis Chris</a>
+      <a class="btn primary" href="revenge.html">Meet Telecrisis Revenge</a>
       <a class="btn" href="gallery.html">See screenshots</a>
     </div>
   </div>
@@ -122,11 +130,11 @@ page("index.html", "Awesome Squad · The Telecrisis games",
       <h3>Telecrisis Chris</h3>
       <p>A turn-based space roguelike. Pick a pilot, chart a run across the stars, and break each star's Void Core while asteroids, sentinels and gravity work against you.</p>
     </a>
-    <div class="card">
-      <span class="tag soon">More soon</span>
+    <a class="card" href="revenge.html">
+      <span class="tag">In development · v{RV_VER}</span>
       <h3>Telecrisis Revenge</h3>
-      <p>Details coming soon.</p>
-    </div>
+      <p>An arena tactics RPG with timed strikes. The children of the Federation's imprisoned pilots fight their way through its gladiatorial Games to reach the four leaders, and bring them down.</p>
+    </a>
   </div>
 </section>
 
@@ -134,7 +142,8 @@ page("index.html", "Awesome Squad · The Telecrisis games",
   <h2>Explore</h2>
   <div class="grid four">
     <a class="card" href="pilots.html"><span class="icon">✦</span><h3>8 pilots, 32 keystones</h3><p>Every pilot flies differently. Each run you can pick one keystone that bends the rules around their style.</p></a>
-    <a class="card" href="gallery.html"><span class="icon">▣</span><h3>Screenshots</h3><p>Star fights, the star map, and all four side quests.</p></a>
+    <a class="card" href="classes.html"><span class="icon">⚔</span><h3>{len(RV["classes"])} gladiator classes</h3><p>Telecrisis Revenge: tanks, brawlers, snipers, medics and more, each with a passive, a signature move and a mastery to win.</p></a>
+    <a class="card" href="gallery.html"><span class="icon">▣</span><h3>Screenshots</h3><p>Star fights and side quests from Chris; arenas, timed strikes and the team quarters from Revenge.</p></a>
     <a class="card" href="devlog.html"><span class="icon">✎</span><h3>Devlog</h3><p>What changed lately, build by build.</p></a>
     <a class="card" href="team.html"><span class="icon">☆</span><h3>The team</h3><p>Who makes it, who plays it first, and whose music and art it uses.</p></a>
   </div>
@@ -261,6 +270,174 @@ page("pilots.html", "Pilots · Telecrisis Chris",
 <p class="ph">Keystones are new and still being balanced, so names and numbers may change.</p>
 """)
 
+# ---------------- revenge ----------------
+RV_LINKS = [("Play in browser", ""), ("itch.io", "")]   # set a url to switch a button on
+
+def rv_btns():
+    out = ['<a class="btn primary" href="classes.html">Meet the classes</a>', '<a class="btn" href="gallery.html#revenge">Screenshots</a>']
+    for name, url in RV_LINKS:
+        if url:
+            out.append(f'<a class="btn" href="{E(url)}" target="_blank" rel="noopener">{E(name)}</a>')
+        else:
+            out.append(f'<span class="btn off" title="Coming soon">{E(name)} <span class="soon">soon</span></span>')
+    return '<div class="btns">' + "".join(out) + "</div>"
+
+story = "".join(f'<div class="card"><h3>{E(c["title"])}</h3>' + "".join(f"<p>{E(t)}</p>" for t in c["text"] if t != "First, decide who each of them will be.") + "</div>"
+                for c in RV["intro"])
+circuits = "".join(f'<tr><td><strong>{E(a["name"])}</strong><br><span class="small muted">Outpost: {E(a["outpost"])}</span></td>'
+                   f'<td class="muted">{E(a["desc"])}</td><td>{a["lo"]}–{a["hi"]}</td></tr>' for a in RV["areas"])
+inputs = "".join(f'<li>{E(st["name"])}<b>{E(st["help"].split(".")[0])}</b></li>' for st in RV["styles"])
+C = RV["counts"]
+gear_total = C["weapons"] + C["armor"] + C["accessories"]
+
+page("revenge.html", "Telecrisis Revenge · Awesome Squad",
+     "Telecrisis Revenge is an arena tactics RPG with timed strikes: fight through the Federation's gladiatorial Games, circuit by circuit, to reach its leaders.", f"""
+<section class="hero">
+  <div>
+    <div class="kicker">In development · v{RV_VER}</div>
+    <h1>Telecrisis <span>Revenge</span></h1>
+    <p class="lead">An arena tactics RPG where every hit is timed. The Federation keeps its people quiet with gladiatorial Games. The children of the pilots it locked away enter them, win their way up four circuits, and get close enough to the leaders to bring them down.</p>
+    {rv_btns()}
+  </div>
+  <img class="shot" src="img/shots/rv-attack.jpg" alt="Savage lines up a Sweep Bar strike on a Federation Trooper">
+</section>
+
+<section>
+  <h2>The story</h2>
+  <div class="grid">{story}</div>
+</section>
+
+<section>
+  <h2>How a match plays</h2>
+  <p class="muted">Turn-based on a grid, in speed order. Positioning sets up the hit; your timing decides how hard it lands.</p>
+  <ol class="loop">
+    <li>PLACE<b>set your formation</b></li>
+    <li>MOVE<b>height, flanks, cover</b></li>
+    <li>STRIKE<b>time the input</b></li>
+    <li>GUARD<b>parry their blows</b></li>
+    <li>WIN<b>XP, gear, the crowd</b></li>
+  </ol>
+  <div class="grid four">
+    <div class="card"><span class="icon">⏱</span><h3>Timed strikes</h3><p>Every weapon has its own input: sweep bars, chains, combos, lock-ons and more. Land a Critical for big damage; the timing is the same for every fighter, so skill matters, not stats.</p></div>
+    <div class="card"><span class="icon">⛨</span><h3>Guard and parry</h3><p>On the enemy's turn you guard with your own timing. A perfect parry toward the attacker blocks it and counters. Officers feint, so wait for the real swing.</p></div>
+    <div class="card"><span class="icon">⬢</span><h3>Position matters</h3><p>Side hits do +15%, back hits +30%. High ground helps. Fighters next to each other square up face to face, and walking away gives your opponent a parting strike.</p></div>
+    <div class="card"><span class="icon">☄</span><h3>Arena rules</h3><p>Hold the zone, survive the rounds, take down the champion, win fast, or fight with no supplies. Shock plates, falling debris, oil fires, cover and overwatch change every map.</p></div>
+  </div>
+</section>
+
+<section>
+  <div class="feature">
+    <div>
+      <h2>Beat the <span>odds</span></h2>
+      <p>Quick fighters can dodge a hit, but never a Critical. Land one on an enemy that was about to slip away and you get <strong>DODGE DENIED!</strong> as it's dragged back into the hit.</p>
+      <p>The crowd is on the underdog's side. Fall behind and their cheers top up your team; pull ahead and they pay you in credits instead of making the fight easier.</p>
+    </div>
+    <img src="img/shots/rv-crit.jpg" alt="A Critical on the Sweep Bar">
+  </div>
+  <div class="feature flip">
+    <div>
+      <h3>Read the board before you commit</h3>
+      <p>Orange outlines show what your chosen attack can reach, from where you stand or from any tile you hover. Click an enemy to see the damage preview, then click again to strike; you can still back out at the risk choice.</p>
+      <p class="muted">Angled view shows the heights; press V for a flat, top-down board.</p>
+    </div>
+    <img src="img/shots/rv-battle.jpg" alt="An engaged pair, range outlines and the attack preview">
+  </div>
+  <div class="feature">
+    <div>
+      <h3>Guarding is a skill too</h3>
+      <p>Every enemy strike runs its own meter. Guard to take less, parry toward the attacker to take nothing and hit back.</p>
+    </div>
+    <img src="img/shots/rv-guard.jpg" alt="Guarding an Officer's strike, with the parry direction shown">
+  </div>
+</section>
+
+<section>
+  <h2>The road to the Games</h2>
+  <div class="feature">
+    <div>
+      <p>Four circuits stand between the team and the Federation's leaders. Each is a ladder of proving-ground bouts, cup matches and a story match, with two class trials that unlock a mastery for every fighter of that class.</p>
+      <p>The circuit final is gated: clear the ladder first. The ladder alone leaves you a few levels short, so the circuit's Exhibition and the Open Arena are there to grind, and their wins can drop gear and arena-only rare finds.</p>
+      <p class="muted">Finish the story and every circuit stays open, along with the Open Arena.</p>
+    </div>
+    <img src="img/shots/rv-map.jpg" alt="The sector map with the four circuits">
+  </div>
+  <table>
+    <tr><th>Circuit</th><th>What it is</th><th>Enemy levels</th></tr>
+    {circuits}
+  </table>
+</section>
+
+<section>
+  <h2>The team quarters</h2>
+  <div class="feature flip">
+    <div>
+      <p>Between matches you run the team: hire recruits, spend training points, learn perks, and pick the party and the formation.</p>
+      <p>The store sells <strong>{gear_total} pieces of gear</strong> across four Mk tiers that open circuit by circuit, plus {C["supplies"]} kinds of supplies. Mk gear arrives already upgraded, the store shows who each piece would improve, and spare gear sells back.</p>
+      <p class="muted">{C["rares"]} rare finds, each with a catch, come from story matches, class trials and side bouts.</p>
+    </div>
+    <img src="img/shots/rv-store.jpg" alt="The store, with gear comparisons for the team">
+  </div>
+</section>
+
+<section>
+  <h2>{len(RV["styles"])} timed inputs</h2>
+  <p class="muted">Each weapon and technique uses one. Practise any of them, with nothing at stake, in the Training Grounds.</p>
+  <ol class="loop">{inputs}</ol>
+  <div class="feature">
+    <div>
+      <h3>Training Grounds</h3>
+      <p>Pick a drill, pick a risk (bigger window or bigger payoff), and keep a tally of your Criticals and best streak.</p>
+    </div>
+    <img src="img/shots/rv-training.jpg" alt="The Training Grounds: the Lock-On drill">
+  </div>
+</section>
+
+<section>
+  <h2>Your game, your way</h2>
+  <div class="grid">
+    <div class="card"><h3>Story / Standard / Hard</h3><p>Enemy strength you can switch at any time. Standard is tuned so an average player loses now and then.</p></div>
+    <div class="card"><h3>Relaxed timing</h3><p>Bigger zones and more time on every input, for anyone who wants the tactics without the pressure.</p></div>
+    <div class="card"><h3>Open Arena</h3><p>Free-play bouts against opponents at your level. Pick the arena, the odds and the team size.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Classes</h2>
+  <p class="muted">{len(RV["classes"])} classes, each with a weight, a passive, a signature technique and a mastery. <a href="classes.html">Meet them all →</a></p>
+</section>
+""", image="img/shots/rv-attack.jpg")
+
+# ---------------- classes ----------------
+WEIGHT_COL = {"heavy": "#ff4d5e", "medium": "#f2c14e", "light": "#3fd6ff"}
+ccards = []
+for c in RV["classes"]:
+    col = WEIGHT_COL.get(c["weight"], "#b46cff")
+    weapons = ", ".join(w.capitalize() for w in c["weapons"])
+    dodge = f'{round(c["dodge"] * 100)}%' if c["dodge"] else "none"
+    ccards.append(f"""
+  <article class="card pilot" style="--pc:{col}" id="{c["id"]}">
+    <div class="pilot-head"><div><h3>{E(c["name"])}</h3><div class="role">{E(c["role"])} · {E(c["weight"].capitalize())}</div></div><span class="unlock">{E(weapons)}</span></div>
+    <p>{E(c["desc"])}</p>
+    <ul class="stats"><li>HP <b>{c["hp"]}</b></li><li>Attack <b>{c["atk"]}</b></li><li>Defense <b>{c["def"]}</b></li><li>Speed <b>{c["spd"]}</b></li><li>Move <b>{c["move"]}</b></li><li>Dodge <b>{dodge}</b></li></ul>
+    <div class="ability"><strong>{E(c["passive_name"])}:</strong> {E(c["passive_desc"])}</div>
+    <div class="ks-title">Signature · {c["signature_cost"]} energy</div>
+    <ul class="ks"><li><strong>{E(c["signature"])}</strong> — {E(c["signature_desc"].rstrip("."))}.</li></ul>
+    <div class="ks-title" style="margin-top:12px">Mastery</div>
+    <ul class="ks"><li><strong>{E(c["mastery"])}</strong> — {E(c["mastery_desc"].rstrip("."))}. <span class="small">Won in {E(c["trial"])}.</span></li></ul>
+  </article>""")
+page("classes.html", "Classes · Telecrisis Revenge",
+     "The gladiator classes of Telecrisis Revenge: stats, passives, signature techniques and masteries.", f"""
+<section>
+  <div class="kicker">Telecrisis Revenge</div>
+  <h1>The <span>classes</span></h1>
+  <p class="lead">Build a team of up to six. Weight sets armor, speed and matchups: heavy beats medium, medium beats light, light beats heavy. Each class has a passive, a signature technique and a mastery won in its class trial that upgrades every fighter of that class.</p>
+</section>
+<section class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,440px),1fr))">
+{''.join(ccards)}
+</section>
+<p class="ph">Telecrisis Revenge is in development, so classes and numbers may change. Stats shown are at level 1, before training and gear.</p>
+""", image="img/shots/rv-quarters.jpg")
+
 # ---------------- gallery ----------------
 SHOTS = [("star-yellow", "Yellow Star: lining up on the Void Core"),
          ("star-blue", "Blue Giant: fast flares, fast field"),
@@ -269,7 +446,22 @@ SHOTS = [("star-yellow", "Yellow Star: lining up on the Void Core"),
          ("ace", "Ace Hunt"),
          ("convoy", "Escort Convoy"),
          ("wormhole", "Wormhole Run")]
-figs = "".join(f'<figure><a href="img/shots/{s}.jpg" data-cap="{E(c)}"><img src="img/shots/{s}-sm.jpg" alt="{E(c)}" loading="lazy"></a><figcaption>{E(c)}</figcaption></figure>' for s, c in SHOTS)
+RV_SHOTS = [("rv-attack", "Lining up a Sweep Bar strike"),
+            ("rv-crit", "A Critical lands"),
+            ("rv-guard", "Guarding an Officer's strike: parry toward the attacker"),
+            ("rv-battle", "Squared up: range outlines and the attack preview"),
+            ("rv-placement", "Placing the team before a cup match"),
+            ("rv-flat", "Flat view on the Refinery Floor"),
+            ("rv-map", "The sector map: four circuits"),
+            ("rv-quarters", "Team quarters: classes, training and gear"),
+            ("rv-store", "The store, with gear comparisons"),
+            ("rv-briefing", "Match briefing: rules, rewards and the line-up"),
+            ("rv-training", "Training Grounds: the Lock-On drill"),
+            ("rv-title", "Title screen")]
+def figs_of(shots):
+    return "".join(f'<figure><a href="img/shots/{s}.jpg" data-cap="{E(c)}"><img src="img/shots/{s}-sm.jpg" alt="{E(c)}" loading="lazy"></a><figcaption>{E(c)}</figcaption></figure>' for s, c in shots)
+figs = figs_of(SHOTS)
+rv_figs = figs_of(RV_SHOTS)
 lb = """<div class="lightbox" id="lb" role="dialog" aria-modal="true"><button aria-label="Close">✕</button><img alt=""><p></p></div>
 <script>
 const lb=document.getElementById('lb'),li=lb.querySelector('img'),lp=lb.querySelector('p');
@@ -280,23 +472,66 @@ lb.addEventListener('click',e=>{if(e.target!==li)lb.classList.remove('open');});
 document.addEventListener('keydown',e=>{if(!lb.classList.contains('open'))return;
  if(e.key==='Escape')lb.classList.remove('open');if(e.key==='ArrowRight')show(cur+1);if(e.key==='ArrowLeft')show(cur-1);});
 </script>"""
-page("gallery.html", "Screenshots · Telecrisis Chris",
-     "Screenshots of Telecrisis Chris: star fights, the star map and side quests.", f"""
+page("gallery.html", "Screenshots · Awesome Squad",
+     "Screenshots of the Telecrisis games: Telecrisis Chris star fights and side quests, Telecrisis Revenge arena matches and the team quarters.", f"""
 <section>
-  <div class="kicker">Telecrisis Chris</div>
+  <div class="kicker">Awesome Squad</div>
   <h1><span>Screenshots</span></h1>
-  <p class="lead">From the current development build. Click a shot to see it full size.</p>
+  <p class="lead">From the current development builds. Click a shot to see it full size.</p>
+  <div class="btns"><a class="btn" href="#chris">Telecrisis Chris</a><a class="btn" href="#revenge">Telecrisis Revenge</a></div>
+</section>
+<section id="chris">
+  <h2>Telecrisis <span>Chris</span></h2>
   <div class="gallery">{figs}</div>
+</section>
+<section id="revenge">
+  <h2>Telecrisis <span>Revenge</span> <span class="small muted">v{RV_VER}</span></h2>
+  <div class="gallery">{rv_figs}</div>
 </section>
 """, lb)
 
 # ---------------- devlog ----------------
-page("devlog.html", "Devlog · Telecrisis Chris",
-     "What's new in Telecrisis Chris, build by build.", """
+page("devlog.html", "Devlog · Awesome Squad",
+     "What's new in Telecrisis Chris and Telecrisis Revenge, build by build.", """
 <section>
-  <div class="kicker">Telecrisis Chris</div>
+  <div class="kicker">Awesome Squad</div>
   <h1><span>Devlog</span></h1>
   <p class="lead">What changed lately, newest first.</p>
+  <div class="btns"><a class="btn" href="#revenge">Telecrisis Revenge</a><a class="btn" href="#chris">Telecrisis Chris</a></div>
+</section>
+
+<section id="revenge">
+  <h2>Telecrisis <span>Revenge</span></h2>
+
+  <article class="card post">
+    <div class="date">November 16, 2026 · v0.11.0</div>
+    <h3>Engagement, dodging and a harder Federation</h3>
+    <ul>
+      <li><strong>Squaring up:</strong> fighters next to each other face off. An engaged fighter keeps facing its opponent, so its allies can be flanked, and walking away gives the opponent a parting strike. Light fighters slip away free.</li>
+      <li><strong>Dodging by class:</strong> quick fighters dodge some hits, but never a Critical. Land one on a dodge and it's <strong>DODGE DENIED!</strong></li>
+      <li><strong>Story / Standard / Hard</strong> enemy strength, a tougher baseline, and harder circuit finals and story matches, tuned with a campaign simulator.</li>
+      <li><strong>Side bouts that matter:</strong> the ladder leaves you a few levels short of each final. Exhibitions and the Open Arena pay full XP and can drop gear and four new arena-only rare finds.</li>
+      <li><strong>Gear:</strong> a Mk tier of gear for every circuit (77 pieces in all), rare finds from story matches and trials, selling, gear comparison in the store, and three new supplies.</li>
+      <li><strong>No more misclicks:</strong> place your fighters before each match, see every attack's range, and confirm both the target and the risk choice. You can back out and get your energy back.</li>
+      <li><strong>Defense rework:</strong> Defense now scales with the attacker's level, so armor and training matter all the way to level 80.</li>
+    </ul>
+  </article>
+
+  <article class="card post">
+    <div class="date">November 15, 2026 · v0.10.0</div>
+    <h3>The Games open</h3>
+    <ul>
+      <li><strong>The campaign:</strong> four circuits of proving grounds, cup matches, story matches and class trials, each ending in a gated final. The level cap is 99.</li>
+      <li><strong>Sixteen timed inputs</strong>, from Sweep Bars to Lock-Ons, and the Training Grounds to practise them.</li>
+      <li><strong>Match rules and hazards:</strong> hold the zone, survive, champions, blitz and iron rules; shock plates, debris, oil fires, cover and overwatch.</li>
+      <li><strong>A crowd that backs the underdog.</strong></li>
+      <li><strong>The space-coliseum look:</strong> gladiator figures, an angled board that shows height, and a new arena backdrop.</li>
+    </ul>
+  </article>
+</section>
+
+<section id="chris">
+  <h2>Telecrisis <span>Chris</span></h2>
 
   <article class="card post">
     <div class="date">November 2026 · in progress</div>
@@ -340,7 +575,7 @@ page("devlog.html", "Devlog · Telecrisis Chris",
 
 # ---------------- team ----------------
 page("team.html", "Team · Awesome Squad",
-     "The people behind Telecrisis Chris, plus music, art and sound credits.", """
+     "The people behind the Telecrisis games, plus music, art and sound credits.", """
 <section>
   <div class="kicker">Awesome Squad</div>
   <h1>The <span>team</span></h1>
@@ -384,6 +619,14 @@ page("team.html", "Team · Awesome Squad",
       <ul>
         <li>Steven LaBarge</li><li>Kevin Larsen</li><li>Stephanie Weber</li><li>Peter Savage</li><li>Will Savage</li>
         <li>Anthony Fontana<span>Came up with onboarding through gameplay progression</span></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Telecrisis Revenge</h3>
+      <ul>
+        <li>Ted Savage<span>Game design, story and direction</span></li>
+        <li>Claude (Anthropic)<span>Code, under Ted Savage's design and direction</span></li>
+        <li>Art and audio<span>Gladiator figures and arenas are drawn in code for now; sound effects are generated placeholders</span></li>
       </ul>
     </div>
     <div class="card">
