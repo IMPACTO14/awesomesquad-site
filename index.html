@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Awesome Squad</title>
+<meta name="description" content="Awesome Squad: home of the Telecrisis games.">
+<style>
+  :root {
+    --bg: #0d0b1a;
+    --panel: #1a1530;
+    --edge: #3a2f63;
+    --text: #e8e4f5;
+    --muted: #a49cc4;
+    --gold: #f2c14e;
+    --purple: #b46cff;
+    --red: #ff4d5e;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    color: var(--text);
+    background:
+      radial-gradient(1200px 600px at 70% -10%, #2a1c55 0%, transparent 60%),
+      radial-gradient(900px 500px at 10% 110%, #1d1440 0%, transparent 60%),
+      var(--bg);
+    min-height: 100vh;
+    line-height: 1.55;
+  }
+  .stars {
+    position: fixed; inset: 0; pointer-events: none; opacity: .55;
+    background-image:
+      radial-gradient(1px 1px at 20% 30%, #fff 50%, transparent 51%),
+      radial-gradient(1px 1px at 80% 20%, #fff 50%, transparent 51%),
+      radial-gradient(1.5px 1.5px at 60% 70%, #cfc6ff 50%, transparent 51%),
+      radial-gradient(1px 1px at 35% 85%, #fff 50%, transparent 51%),
+      radial-gradient(1px 1px at 90% 60%, #fff 50%, transparent 51%),
+      radial-gradient(1.5px 1.5px at 10% 55%, #ffe7a8 50%, transparent 51%);
+  }
+  main { position: relative; max-width: 960px; margin: 0 auto; padding: 72px 24px 48px; }
+  .kicker { color: var(--gold); letter-spacing: .18em; font-size: 13px; font-weight: 700; text-transform: uppercase; }
+  h1 { font-size: clamp(40px, 7vw, 72px); margin: 8px 0 12px; letter-spacing: -.02em; }
+  h1 span { color: var(--purple); }
+  .lead { color: var(--muted); font-size: 19px; max-width: 620px; margin: 0 0 48px; }
+  .games { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .card {
+    background: linear-gradient(180deg, #211a3d, var(--panel));
+    border: 1px solid var(--edge);
+    border-radius: 14px;
+    padding: 24px;
+    box-shadow: 0 0 0 1px rgba(180,108,255,.08), 0 18px 40px rgba(0,0,0,.35);
+  }
+  .card h2 { margin: 0 0 6px; font-size: 24px; }
+  .tag { display: inline-block; font-size: 12px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+         color: var(--bg); background: var(--gold); border-radius: 999px; padding: 2px 10px; margin-bottom: 14px; }
+  .tag.soon { background: var(--edge); color: var(--muted); }
+  .card p { color: var(--muted); margin: 0; }
+  footer { position: relative; max-width: 960px; margin: 0 auto; padding: 24px; color: var(--muted); font-size: 13px;
+           border-top: 1px solid var(--edge); }
+</style>
+</head>
+<body>
+<div class="stars" aria-hidden="true"></div>
+<main>
+  <div class="kicker">Awesome Squad</div>
+  <h1>The <span>Telecrisis</span> games</h1>
+  <p class="lead">Tactical space games built by Ted and friends. Plan your move, commit to it, and live with what the void throws back.</p>
+
+  <section class="games">
+    <article class="card">
+      <span class="tag">In development</span>
+      <h2>Telecrisis Chris</h2>
+      <p>A turn-based space roguelike. Pick a pilot, chart a run across the stars, and break each star's Void Core while asteroids, sentinels and gravity work against you.</p>
+    </article>
+    <article class="card">
+      <span class="tag soon">More soon</span>
+      <h2>Telecrisis Revenge</h2>
+      <p>Details coming soon.</p>
+    </article>
+  </section>
+</main>
+<footer>© Awesome Squad · awesomesquad.fyi</footer>
+</body>
+</html>
