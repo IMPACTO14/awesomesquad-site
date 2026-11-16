@@ -1,3 +1,5 @@
+# WARNING (2026-11-16): Ted edits the pages by hand on GitHub. Running this rewrites every page
+# and wipes those edits. Edit the .html files directly instead.
 import re, html, os, sys
 
 # Builds every page of awesomesquad.fyi. Usage: python3 tools/build_site.py <site dir> <path to Constants.gd>
@@ -27,13 +29,13 @@ for block in re.finditer(r'"(\w+)": \[(.*?)\n\t\]', pool, re.S):
 PILOTS = [
     # id, name, color, role, ability title, ability text, hull, shields, dice, unlock
     ("will", "Schmeckeldorf", "#4488FF", "Patient marksman. Lock-on builds while the Core sits in the attack window.",
-     "Targeting Lock", "+1 attack die for each consecutive turn with the target in your attack arc (max +3).", 12, 5, 2, None),
+     "Targeting Lock", "+1 attack die for each consecutive turn with the target in your attack arc (max +3).", 13, 5, 2, None),
     ("ted", "IMPACTO", "#FF2222", "Brawler. Likes it up close and personal.",
      "Firing Solution", "+1 attack die per turn within 240px of your target. At +2 or more, Evade refills to the solution minus 1.", 8, 3, 3, None),
     ("peter", "SpooderMoon", "#FF8811", "Precision alignment and speed.",
      "Precision Lock", "With velocity and facing within 30° of each other, attacks hit on 8+.", 10, 4, 2, None),
     ("cara", "LSP", "#E050E0", "Slow and steady. Surplus shields become harvest power.",
-     "Harvest Conversion", "Each shield above max is +1 harvest die. Overload costs 2 energy.", 14, 8, 1, None),
+     "Harvest Conversion", "Each shield above max is +1 harvest die. Overload costs 2 energy.", 14, 7, 1, None),
     ("steven", "Axemodeus", "#1AD9D9", "Cool and calculated.",
      "Calculated Strike", "Hitting on consecutive turns from the same arc zone grants +1 die (max 3). Resets when you switch arcs.", 10, 5, 2, "Unlocks with progress"),
     ("covert", "Cobra", "#F2BF1A", "Gutsy and tricky.",
