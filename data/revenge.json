@@ -182,7 +182,7 @@
       "role": "Long range",
       "signature": "Mark Target",
       "signature_cost": 1,
-      "signature_desc": "Free action. The whole party deals 20% more damage to this enemy for the rest of the battle.",
+      "signature_desc": "Free action, once a turn. The whole party deals 20% more damage to this enemy. You keep one mark at a time: marking another enemy moves it.",
       "spd": 5,
       "trial": "Sniper Trial: Long Sight (The Halcyon Games)",
       "weapons": [
@@ -246,7 +246,7 @@
     }
   ],
   "counts": {
-    "accessories": 26,
+    "accessories": 30,
     "armor": 13,
     "layouts": 9,
     "rares": 16,
@@ -359,5 +359,5 @@
       "name": "Pressure Gauge"
     }
   ],
-  "version": "0.12.0"
+  "version": "0.13.0"
 }
