@@ -506,6 +506,18 @@ page("devlog.html", "Devlog · Awesome Squad",
   <h2>Telecrisis <span>Revenge</span></h2>
 
   <article class="card post">
+    <div class="date">November 17, 2026 · v0.12.0</div>
+    <h3>The Games go pocket-sized</h3>
+    <ul>
+      <li><strong>Play on your phone:</strong> open the game in your phone's browser, turn it sideways, and it switches to a phone layout with bigger buttons and text. Add it to your home screen and it opens full screen like an app, updating itself when a new build is out.</li>
+      <li><strong>Touch controls for every timed input:</strong> an on-screen pad appears only when a meter needs it: a direction pad, a big Tap / Hold / Mash button, and left and right buttons for Alternating Mash. Lock-On works like a trackpad: drag anywhere and the crosshair follows, so your finger never covers the target.</li>
+      <li><strong>Timing that keeps up:</strong> every press is now judged at the moment your finger landed, not when the game got round to it. A new <strong>Timing check</strong> in Options has you tap along to a beat and adjusts for your screen's delay.</li>
+      <li><strong>Battle on a small screen:</strong> Fighter / Info / Log tabs, tap any unit to inspect it, tap a tile twice to move, and tap any attack or supply to see what it does (and, if it's locked, why).</li>
+      <li><strong>Finger scrolling</strong> for every list, the Team, Store and Records tabs as swipe strips, and option rows that grow to fit their text.</li>
+    </ul>
+  </article>
+
+  <article class="card post">
     <div class="date">November 16, 2026 · v0.11.0</div>
     <h3>Engagement, dodging and a harder Federation</h3>
     <ul>
