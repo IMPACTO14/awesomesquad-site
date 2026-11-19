@@ -561,6 +561,21 @@ page("devlog.html", "Devlog · Awesome Squad",
   <h2>Telecrisis <span>Revenge</span></h2>
 
   <article class="card post">
+    <div class="date">November 19, 2026 · v0.14.0</div>
+    <h3>Star maps, skill trees and eight new ways to hit</h3>
+    <ul>
+      <li><strong>A map of the circuits:</strong> each circuit is now a star system you travel around. Arena worlds hold the ladder, the seat of power holds the story match and final, and there are trial grounds, the pits for side bouts, Vantor Academy's outpost, and your home station. Each place has its own shop stock, local recruits, a veteran for hire, and conditions like low gravity, dust storms or a roaring crowd.</li>
+      <li><strong>Off the map:</strong> every circuit hides a location you have to earn your way into, with contraband gear and a class you can't get anywhere else. Four in all.</li>
+      <li><strong>Skill trees:</strong> fighters earn a skill point every level and spend it in their class's tree: three branches of new attacks and passives, each ending in a capstone, and a fighter can only take one. Two fighters of the same class can play nothing alike. Retrain at the home station.</li>
+      <li><strong>Eight new attack inputs:</strong> Feint, Push Your Luck, Pendulum, Lead the Target, Dual Wield, Cook the Fuse, Tug of War and Path Trace, all in the Training Grounds.</li>
+      <li><strong>Fairer counters:</strong> a perfect parry only hits back if your weapon can reach the attacker (or you've learned Deflect), and duo follow-ups need the partner in reach of the target.</li>
+      <li><strong>A bigger board</strong> (16 by 10), so fights open with a bit of maneuvering instead of instant contact.</li>
+      <li><strong>Fits your screen:</strong> 16:10 screens like the Steam Deck and ultrawide monitors now use the whole display, small text is bigger, and there's a Text size option. A <strong>Next match</strong> button jumps straight to your next fight.</li>
+      <li><strong>38 achievements</strong> now, including finding the hidden places.</li>
+    </ul>
+  </article>
+
+  <article class="card post">
     <div class="date">November 18, 2026 · v0.13.0</div>
     <h3>No two matches alike</h3>
     <ul>

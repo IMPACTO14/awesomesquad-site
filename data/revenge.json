@@ -246,13 +246,13 @@
     }
   ],
   "counts": {
-    "accessories": 30,
-    "armor": 13,
+    "accessories": 46,
+    "armor": 21,
     "layouts": 9,
     "rares": 16,
     "supplies": 6,
-    "techniques": 32,
-    "weapons": 38
+    "techniques": 56,
+    "weapons": 54
   },
   "intro": [
     {
@@ -357,7 +357,47 @@
       "help": "Hold to push the needle up, let go to let it fall. Keep it in the moving band.",
       "id": "gauge",
       "name": "Pressure Gauge"
+    },
+    {
+      "help": "Fake tells flash first. Strike only on the real one, as fast as you can.",
+      "id": "feint",
+      "name": "Feint"
+    },
+    {
+      "help": "Each press adds a random 10-30% power. Stop when you like; over 100% fizzles.",
+      "id": "luck",
+      "name": "Push Your Luck"
+    },
+    {
+      "help": "Press at the top of each swing to build momentum, then strike as it passes the bottom.",
+      "id": "pendulum",
+      "name": "Pendulum"
+    },
+    {
+      "help": "The shot takes a moment to land: fire before the target reaches the mark.",
+      "id": "lead",
+      "name": "Lead the Target"
+    },
+    {
+      "help": "Two bars, one per hand: Left stops the top one, Right the bottom. The worse hand counts.",
+      "id": "dual",
+      "name": "Dual Wield"
+    },
+    {
+      "help": "Hold to cook; the ticks speed up. Let go just before it blows.",
+      "id": "fuse",
+      "name": "Cook the Fuse"
+    },
+    {
+      "help": "Mash to haul the rope in, but stop while BRACE flashes or you lose ground.",
+      "id": "tug",
+      "name": "Tug of War"
+    },
+    {
+      "help": "Steer through the gates in order before time runs out.",
+      "id": "trace",
+      "name": "Path Trace"
     }
   ],
-  "version": "0.13.0"
+  "version": "0.14.0"
 }
