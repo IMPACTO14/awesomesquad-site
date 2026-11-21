@@ -2,7 +2,7 @@
   "areas": [
     {
       "desc": "Dust-bowl arenas on the Federation's edge, where nobody asks who is signing up. The Rim Governor sponsors the league and receives its champions in person.",
-      "hi": 20,
+      "hi": 10,
       "lo": 1,
       "matches": 11,
       "name": "The Rim League",
@@ -10,24 +10,24 @@
     },
     {
       "desc": "Refinery-moon arenas bankrolled by the Fuel Baron, who owns every tanker the Federation flies. His circuit, his rules, his box seat.",
-      "hi": 40,
-      "lo": 20,
+      "hi": 20,
+      "lo": 10,
       "matches": 11,
       "name": "The Kessrow Circuit",
       "outpost": "Smuggler's Burrow"
     },
     {
       "desc": "Military games held in the shipyards to entertain the fleet. The Fleet Marshal awards the medals personally.",
-      "hi": 60,
-      "lo": 40,
+      "hi": 30,
+      "lo": 20,
       "matches": 11,
       "name": "The Halcyon Games",
       "outpost": "Breakers' Yard"
     },
     {
       "desc": "The Grand Coliseum at the heart of the Federation. The High Chancellor crowns the champions, and keeps the keys to the prison where the pilots are held.",
-      "hi": 80,
-      "lo": 60,
+      "hi": 40,
+      "lo": 30,
       "matches": 11,
       "name": "The Core Championship",
       "outpost": "Hollow Asteroid Camp"
@@ -251,7 +251,7 @@
     "layouts": 9,
     "rares": 16,
     "supplies": 6,
-    "techniques": 56,
+    "techniques": 66,
     "weapons": 54
   },
   "intro": [
@@ -399,5 +399,5 @@
       "name": "Path Trace"
     }
   ],
-  "version": "0.14.0"
+  "version": "0.15.0"
 }

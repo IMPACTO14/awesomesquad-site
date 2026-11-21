@@ -561,6 +561,19 @@ page("devlog.html", "Devlog · Awesome Squad",
   <h2>Telecrisis <span>Revenge</span></h2>
 
   <article class="card post">
+    <div class="date">November 20, 2026 · v0.15.0</div>
+    <h3>Real training, and a Federation that learns</h3>
+    <ul>
+      <li><strong>New stats:</strong> Melee and Ranged Power, Melee and Ranged Defense, Instinct, Ferocity, Guard and Showmanship. Each unlocks perks at 6, 12 and 18 points, so stacking one stat means falling behind in others.</li>
+      <li><strong>Your inputs decide the outcome:</strong> no stat, perk or item changes a timing bar or rolls dice over your result. Instinct now builds a Hot Streak from Criticals in a row, and defensive bonuses make your guards stronger instead of adding dodge chance.</li>
+      <li><strong>Level cap 50:</strong> each circuit takes your team about 10 levels. Every 5 levels pick a feat (like Reckless or Pack Tactics) or a stat boost, at level 10 choose one of two specializations for your class, and at 30 it turns Elite. A new row of the skill tree opens each circuit.</li>
+      <li><strong>New moves:</strong> charges, vaults, harpoon pulls, position swaps, line, cone and burst attacks, and crowd plays like Showboat and the Grand Finale.</li>
+      <li><strong>Federation drills:</strong> as the circuits go on, enemies learn combos, delayed strikes and plated armor, and their squads start focusing fire, escorting and pincering. Every one is shown on the enemy's card and is the same every time, so you can learn it. No hidden difficulty boosts: later circuits ask more of your timing and tactics.</li>
+      <li><strong>Steadier pacing:</strong> the four circuits take about the same time, the early walls are smoothed out, and a team left short by an entry rule faces fewer opponents.</li>
+    </ul>
+  </article>
+
+  <article class="card post">
     <div class="date">November 19, 2026 · v0.14.0</div>
     <h3>Star maps, skill trees and eight new ways to hit</h3>
     <ul>
