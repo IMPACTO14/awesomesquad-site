@@ -25,7 +25,7 @@
       "outpost": "Breakers' Yard"
     },
     {
-      "desc": "The Grand Coliseum at the heart of the Federation. The High Chancellor crowns the champions, and keeps the keys to the prison where the pilots are held.",
+      "desc": "The Crown Ring, the great arena station at the heart of the Federation. The High Chancellor crowns the champions, and keeps the keys to the prison where the pilots are held.",
       "hi": 40,
       "lo": 30,
       "matches": 11,
@@ -274,7 +274,7 @@
         "In the arena they are entertainers. Outside it they are taking the Federation apart, one core at a time.",
         "First, decide who each of them will be."
       ],
-      "title": "Play to the crowd"
+      "title": "Play to the cameras"
     }
   ],
   "styles": [
@@ -399,5 +399,5 @@
       "name": "Path Trace"
     }
   ],
-  "version": "0.15.0"
+  "version": "0.16.0"
 }
